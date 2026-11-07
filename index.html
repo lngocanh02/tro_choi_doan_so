@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trò chơi đoán số</title>
+
+    <style>
+        body {
+    background: #10172A;
+    font-family: Arial;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.game {
+    background: #202C45;
+    color: white;
+    width: 320px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+h1 {
+    color: #8EA2FF;
+}
+
+input {
+    padding: 12px;
+    border-radius: 8px;
+}
+
+button {
+    background: #6478E8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+    cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+
+    <<div class="game">
+    <h1>🎯 ĐOÁN SỐ</h1>
+    <p>Đoán một số từ 1 đến 100</p>
+
+    <input type="number" id="guess" placeholder="Nhập số">
+
+    <button onclick="doanSo()">ĐOÁN SỐ</button>
+
+    <p id="message">Hãy bắt đầu!</p>
+    <p>Số lần đoán: <span id="count">0</span></p>
+
+    <button onclick="choiLai()">CHƠI LẠI</button>
+</div>
+    <script>
+       let soBiMat = Math.floor(Math.random() * 100) + 1;
+let soLan = 0;
+
+function doanSo() {
+    let soDoan = Number(document.getElementById("guess").value);
+
+    if (!Number.isInteger(soDoan) || soDoan < 1 || soDoan > 100) {
+        document.getElementById("message").innerText = "Nhập số từ 1 đến 100!";
+        return;
+    }
+
+    soLan++;
+    document.getElementById("count").innerText = soLan;
+
+    if (soDoan < soBiMat) {
+        document.getElementById("message").innerText = "Bạn đoán quá thấp!";
+    } else if (soDoan > soBiMat) {
+        document.getElementById("message").innerText = "Bạn đoán quá cao!";
+    } else {
+        document.getElementById("message").innerText = "🎉 Bạn đã chiến thắng!";
+    }
+}
+
+function choiLai() {
+    soBiMat = Math.floor(Math.random() * 100) + 1;
+    soLan = 0;
+    document.getElementById("count").innerText = 0;
+    document.getElementById("guess").value = "";
+    document.getElementById("message").innerText = "Hãy bắt đầu!";
+}
+    </script>
+
+</body>
+</html>
